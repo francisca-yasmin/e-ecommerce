@@ -8,7 +8,7 @@ export default function Home() {
   const [produtos, setProdutos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
 
-  const produtosPorPagina = 12;
+  const produtosPorPagina = 8;
 
   //paginas
   const indexUltimoProduto = paginaAtual * produtosPorPagina;
@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <>
     <h1 className="text-3xl font-bold text-center my-8"> Lista de Produtos </h1>
-    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {produtos.map((produto: any) => (
           <Card key={produto.id} produto={produto} />
         ))}
