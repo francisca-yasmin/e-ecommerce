@@ -1,6 +1,7 @@
 import { Card } from "../../Components/Card";
 import axios from "axios";
 import { useEffect, useState } from "react"; //state controla em que mommento do codigo eu estou, effect exibe isso em tela
+import { Header } from "../../Components/Header";
 
 export default function Home() {
   const API_url = "https://dummyjson.com/products";
@@ -8,7 +9,7 @@ export default function Home() {
   const [produtos, setProdutos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
 
-  const produtosPorPagina = 8;
+  const produtosPorPagina = 6;
 
   //paginas
   const indexUltimoProduto = paginaAtual * produtosPorPagina;
@@ -30,11 +31,15 @@ export default function Home() {
     });
   }, []);
 
+  if (!produtosPorPagina) {
+    return <p className="text-center mt-10 text-lg">Carregando...</p>;
+  }
+
   return (
     <>
-    <h1 className="text-3xl font-bold text-center my-8"> Lista de Produtos </h1>
-    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-        {produtos.map((produto: any) => (
+    <Header/>
+    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+        {produtosPagina.map((produto: any) => (
           <Card key={produto.id} produto={produto} />
         ))}
     </div>
@@ -46,7 +51,7 @@ export default function Home() {
               key={i + 1}
               onClick={() => mudarPagina(i + 1)}
               className={`px-6 py-2 rounded ${
-                paginaAtual === i + 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200'
+                paginaAtual === i + 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 cursor-pointer'
               }`}
             >
               {i + 1}
